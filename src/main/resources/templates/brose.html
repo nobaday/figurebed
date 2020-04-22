@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <title>图床应用</title>
+
+</head>
+<body>
+<!--导航-->
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!--小屏幕导航按钮和logo-->
+        <div class="navbar-header">
+            <button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+
+            <a class="navbar-brand" href="http://www.nobaday.xyz" style="padding-top: 5px;">
+                <img alt="nobaday" src="http://xyz-nobaday-myblog-images-avatar.oss-cn-shenzhen.aliyuncs.com/de135a02ef334d7e9f7af714a3c2fc08.png">
+            </a>
+        </div>
+        <!--小屏幕导航按钮和logo-->
+        <!--导航-->
+        <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+                <li class="active"><a th:href="@{/brose}"><span class="glyphicon glyphicon-picture"></span>&nbsp;&nbsp;浏览</a></li>
+                <li><a th:href="@{/upload}"><span class="glyphicon glyphicon-upload"></span>&nbsp;&nbsp;上传</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a th:href="@{/logout}"><span class="glyphicon glyphicon-log-out"></span>&nbsp;&nbsp;退出</a></li>
+            </ul>
+        </div>
+        <!--导航-->
+
+    </div>
+</nav>
+<!--导航-->
+
+<div class="container" align="center">
+
+    <!-- 图片列表 -->
+    <ul class="list-unstyled">
+        <li th:each="figure : ${figures}" style="display:inline">
+            <img class="img-thumbnail" style="margin-bottom:5px;" th:src="${figure.url}">
+        </li>
+    </ul>
+    <!-- 结束 -->
+
+    <!-- 分页 -->
+    <nav class="mt-5" style="margin-top:30px;" th:if="${page.rows>0}" th:fragment="pagination">
+        <ul class="pagination justify-content-center">
+            <li class="page-item">
+                <a class="page-link" th:href="@{${page.path}(current=1)}">首页</a>
+            </li>
+            <li th:class="|page-item ${page.current==1?'disabled':''}|">
+                <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
+            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
+                <a class="page-link" href="#" th:text="${i}">1</a>
+            </li>
+            <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
+                <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" th:href="@{${page.path}(current=${page.total})}">末页</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- 结束 -->
+</div>
+
+<footer style="margin-top:50px;">
+</footer>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<!-- 分页插件 -->
+<script src="https://cdn.bootcss.com/backbone.paginator/2.0.8/backbone.paginator.min.js"></script>
+
+</body>
+</html>
