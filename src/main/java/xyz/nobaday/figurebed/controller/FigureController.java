@@ -37,9 +37,6 @@ public class FigureController {
         String picURL = figureService.upLoad(file);
         model.addAttribute("picURL", picURL);
 
-        int a = 10;
-        System.out.println(picURL);
-
         return "/upload";
     }
 
