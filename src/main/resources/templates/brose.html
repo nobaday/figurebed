@@ -46,7 +46,7 @@
     <!-- 图片列表 -->
     <ul class="list-unstyled">
         <li th:each="figure : ${figures}" style="display:inline">
-            <img class="img-thumbnail" style="margin-bottom:5px;" th:src="${figure.url}">
+            <img class="img-thumbnail" style="margin-bottom:5px; width:310px; height:310px;" th:src="${figure.url}">
         </li>
     </ul>
     <!-- 结束 -->
@@ -59,8 +59,8 @@
             </li>
             <li th:class="|page-item ${page.current==1?'disabled':''}|">
                 <a class="page-link" th:href="@{${page.path}(current=${page.current-1})}">上一页</a></li>
-            <li th:class="|page-item ${i==page.current?'active':''}|" th:each="i:${#numbers.sequence(page.from,page.to)}">
-                <a class="page-link" href="#" th:text="${i}">1</a>
+            <li>
+                <a class="page-link" href="#" th:text="${page.current}"></a>
             </li>
             <li th:class="|page-item ${page.current==page.total?'disabled':''}|">
                 <a class="page-link" th:href="@{${page.path}(current=${page.current+1})}">下一页</a>
